@@ -17,7 +17,7 @@ jobs:
               }
             }' -f project_node_id=$PROJECT_NODE_ID -f issue_url=$ISSUE_URL
         env:
-          PROJECT_NODE_ID: ${secrets.PROJECT_NODE_ID}
-          GITHUB_TOKEN: ${secrets.PROJECTS_SECRET}
+          PROJECT_NODE_ID: ${{ secrets.PROJECT_NODE_ID }}
+          GITHUB_TOKEN: ${{ secrets.PROJECTS_SECRET }}
           ISSUE_URL: ${{ github.event.issue.html_url }}
           
