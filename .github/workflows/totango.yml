@@ -21,3 +21,4 @@ jobs:
         TOUCHPOINT_TYPE: ${{ secrets.TOUCHPOINT_TYPE }}
         TOUCHPOINT_TAGS: ${{ secrets.TOUCHPOINT_TAGS }}
         TASK_ASSIGNEE: ${{ vars.TASK_ASSIGNEE }}
+        REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
