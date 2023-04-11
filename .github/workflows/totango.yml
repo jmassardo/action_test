@@ -11,7 +11,7 @@ jobs:
     if: contains(github.event.issue.labels.*.name, 'totango-sync')
     runs-on: ubuntu-latest
     steps:
-    - uses: jmassardo/issues-to-totango@main
+    - uses: jmassardo/issues-to-totango@version2.0
       with:
         ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
         APP_TOKEN: ${{ secrets.APP_TOKEN }}
