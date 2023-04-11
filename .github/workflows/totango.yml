@@ -2,13 +2,15 @@ name: totango
 
 on:
   issues:
-    types: [opened, closed]
+    types: [closed, labeled, edited]
   issue_comment:
 
 jobs:
   process-issue:
-    # Only run if the issue has the correct label or is an issue comment
-    if: contains(github.event.issue.labels.*.name, 'totango-sync')
+    # Prevent action from trying to parse issues that don't have a label which this action supports
+    if: contains(github.event.issue.labels.*.name, 'task') ||
+        contains(github.event.issue.labels.*.name, 'touchpoint')
+
     runs-on: ubuntu-latest
     steps:
     - uses: jmassardo/issues-to-totango@version2.0
@@ -18,3 +20,4 @@ jobs:
         ACTIVITY_TYPE: "nurture_1618339431022" #${{ secrets.ACTIVITY_TYPE }}
         TOUCHPOINT_TYPE: ${{ secrets.TOUCHPOINT_TYPE }}
         TOUCHPOINT_TAGS: ${{ secrets.TOUCHPOINT_TAGS }}
+        TASK_ASSIGNEE: ${{ vars.TASK_ASSIGNEE }}
