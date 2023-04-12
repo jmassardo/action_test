@@ -13,7 +13,7 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-    - uses: jmassardo/issues-to-totango@rockin-robinson/formatting-bug
+    - uses: jmassardo/issues-to-totango@version2.0
       with:
         ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
         APP_TOKEN: ${{ secrets.APP_TOKEN }}
