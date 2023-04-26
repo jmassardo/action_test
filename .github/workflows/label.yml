@@ -6,7 +6,7 @@ on:
 
 jobs:
   label_issue:
-    if:  contains(github.event.issue.labels.*.name, 'Announcement') || contains(github.event.issue.labels.*.name, 'Triage Completed') || contains(github.event.issue.labels.*.name, 'Enablement Plan')
+    if:  "!contains(github.event.issue.labels.*.name, 'totango')"
     runs-on: ubuntu-latest
     steps:
       - uses: andymckay/labeler@master
