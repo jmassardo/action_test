@@ -1,15 +1,15 @@
-name: 'Label Actions'
+name: 'Label Issue'
 
 on:
   issues:
-    types: [created, labeled, unlabeled]
+    types: [opened, labeled, unlabeled]
 
 jobs:
   label_issue:
-    if:  "!contains(github.event.issue.labels.*.name, 'totango')"
+    if:  ${{ !contains(github.event.issue.labels.*.name, 'totango') }}
     runs-on: ubuntu-latest
     steps:
       - uses: andymckay/labeler@master
         with:
-          add-labels: "Slack"
+          add-labels: "totango"
           repo-token: ${{ secrets.GITHUB_TOKEN }}
