@@ -1,0 +1,12 @@
+name: Weekly Snippets Sync
+
+on:
+  schedule:
+    - cron: '35 21 * * 3' # Run every Thursday at 10AM CST
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run script
+        run: Hello world
