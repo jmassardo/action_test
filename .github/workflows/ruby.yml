@@ -9,19 +9,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3
           bundler-cache: true
           working-directory: "scripts/test"
-
-      - name: Install dependencies
-        run: |
-          gem install bundler # Install Bundler
-          bundle install # Install dependencies from Gemfile
-
       - name: Run script
         run: |
           cd scripts/test
