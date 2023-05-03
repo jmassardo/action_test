@@ -1,4 +1,4 @@
-name: Weekly Snippets Sync
+name: Ruby Actions test
 
 on:
   workflow_dispatch:
