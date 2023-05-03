@@ -2,7 +2,7 @@ name: Weekly Snippets Sync
 
 on:
   schedule:
-    - cron: '0 21 * * 3' # Run every Thursday at 10AM CST
+    - cron: '15 21 * * 3' # Run every Thursday at 10AM CST
 
 jobs:
   sync:
