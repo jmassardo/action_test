@@ -7,7 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run a one-line script
-        run: |
-				  gh issue list
-				env:
-				  GITHUB_TOKEN: {{secrets.GITHUB_TOKEN}}
+        run: gh issue list
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
