@@ -32,7 +32,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, ${{ inputs.config-path }}!
+        run: echo Hello, ${{ inputs.username }}!
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
