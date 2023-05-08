@@ -8,4 +8,7 @@ jobs:
   build:
     uses: ./.github/workflows/reusable.yml
     with:
-      username: James
+      REGISTRY_URL: jmassardodocker.azurecr.io
+    secrets:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      AZURE_CLIENT_SECRET:  ${{ secrets.AZURE_CLIENT_SECRET }}
