@@ -29,3 +29,6 @@ jobs:
       credentials:
         username: ${{ secrets.AZURE_CLIENT_ID }}
         password: ${{ secrets.AZURE_CLIENT_SECRET }}
+    steps:
+      - name: Run command on container
+        run: whoami
