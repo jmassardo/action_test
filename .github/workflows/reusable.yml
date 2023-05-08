@@ -50,3 +50,5 @@ jobs:
           registry: ${{ inputs.REGISTRY_URL}}
           username: ${{ secrets.AZURE_CLIENT_ID }}
           password: ${{ secrets.AZURE_CLIENT_SECRET }}
+      - name: Run a one-line script
+        run: docker run ${{ inputs.REGISTRY_URL}}/jmassardodocker/safe-settings:latest
