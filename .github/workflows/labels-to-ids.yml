@@ -1,0 +1,27 @@
+name: labels to id's
+
+on:
+  issues:
+    types: [labeled]
+  issue_comment:
+
+jobs:
+  process-issue:
+    # Prevent action from trying to parse issues that don't have a label which this action supports
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: Determine ID value
+      id: label_to_id
+      run: |
+        echo $GITHUB_LABELS
+        echo "::set-output name=account_id::1"
+      env: 
+        GITHUB_LABELS: ${{ github.event.issue.labels }}
+
+    - name: echo id
+      id: echo
+      run: echo "Account ID is ${ACCOUNT_ID}""
+      env:
+        ACCOUNT_ID: ${{ steps.label_to_id.outputs.account_id }}
+
