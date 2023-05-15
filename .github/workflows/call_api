@@ -1,0 +1,14 @@
+name: call_api
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call_api:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl --request POST \
+          --url https://api.github.com/repos/${{ github.repository }}/dependabot/alerts \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/json' 
