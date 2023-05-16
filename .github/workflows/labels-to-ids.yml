@@ -11,6 +11,9 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
+    - name: Dump payload
+      id: dump_payload
+      run: echo ${{ github.event.issue.labels }}
     - name: Determine ID value
       id: label_to_id
       run: |
