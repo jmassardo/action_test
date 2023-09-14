@@ -1,0 +1,35 @@
+name: Create Compliance Issues
+on:
+  pull_request:
+    types: [opened]
+​jobs:
+  create-issues:
+    name: Create Compliance Issues and Update PR Body
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Read PR Body
+        run: echo "${{ github.event.pull_request.body }}" | sed 's/\r$//' > pr-body-orig.txt
+      - name: Parse Tasklist
+        id: parse-tasklist
+        run: |
+          grep -oP '(^- \[ \] COMPLIANCE-).+' pr-body-orig.txt > tasklist.txt
+      - name: Create Issues
+        id: create-issues
+        run: |
+          for task in $(cat tasklist.txt); do
+            gh issue create --title "COMPLIANCE-${task}-${{ github.event.pull_request.number }}" --body "This issue was automatically created from a tasklist item in the PR body." --assignee "${{ github.actor }}" --label compliance >> issue-urls.txt
+          done
+      - name: Update PR Body
+        run: |
+            awk -f modify-tasklist.awk issue-urls.txt pr-body-orig.txt > pr-body-new.txt
+            gh pr edit --body "$(cat pr-body-new.txt)" --repo "${{ github.repository }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Cleanup
+        run: |
+          rm pr-body-orig.txt
+          rm pr-body-new.txt
+          rm tasklist.txt
+          rm issue-urls.txt
