@@ -2,7 +2,7 @@ name: Create Compliance Issues
 on:
   pull_request:
     types: [opened]
-​jobs:
+jobs:
   create-issues:
     name: Create Compliance Issues and Update PR Body
     runs-on: ubuntu-latest
