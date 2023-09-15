@@ -10,7 +10,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Read PR Body
-        run: echo "${{ github.event.pull_request.body }}" | sed 's/\r$//' > pr-body-orig.txt
+        run: |
+          export PR_BODY="${{ github.event.pull_request.body }}"
+          echo ${PR_BODY@Q} | sed 's/\r$//' > pr-body-orig.txt
       - name: Parse Tasklist
         id: parse-tasklist
         run: |
