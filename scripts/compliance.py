@@ -2,7 +2,8 @@ import os
 import requests
 import json
 
+print("Attempting to parse the pull request env var.")
 # Read the environment variable
-payload = os.getenv('EVENT_PAYLOAD')
+pull = os.getenv('PULL_PAYLOAD')
 
-print(payload)
+print(pull)
