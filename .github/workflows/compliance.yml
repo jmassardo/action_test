@@ -14,4 +14,6 @@ jobs:
         with:
             python-version: '3.x'
       - name: run script
-        run: python3 ./scripts/compliance.py
+        run: |
+          pip3 install requests
+          python3 ./scripts/compliance.py
