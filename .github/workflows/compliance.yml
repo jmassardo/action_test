@@ -19,3 +19,4 @@ jobs:
           python3 ./scripts/compliance.py
         env:
           PULL_PAYLOAD: ${{ toJSON(github.event.pull_request) }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
