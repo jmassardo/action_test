@@ -18,4 +18,4 @@ jobs:
           pip3 install requests
           python3 ./scripts/compliance.py
         env:
-          GITHUB: ${{github.event}}
+          EVENT_PAYLOAD: ${{github.event}}

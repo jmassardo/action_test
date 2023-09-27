@@ -3,6 +3,6 @@ import requests
 import json
 
 # Read the environment variable
-github = os.getenv('GITHUB')
+payload = os.getenv('EVENT_PAYLOAD')
 
-print(github)
+print(payload)
