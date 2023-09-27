@@ -4,7 +4,7 @@ import json
 
 print("Attempting to parse the pull request env var.")
 # Read the environment variable
-pull = os.getenv('PULL_PAYLOAD')
+pull = json.loads(os.getenv('PULL_PAYLOAD'))
 
 # Personal access token from your GitHub account
 token = os.getenv('GITHUB_TOKEN')
