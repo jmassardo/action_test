@@ -9,31 +9,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Read PR Body
-        run: |
-          echo ${PR_BODY@Q}
-          echo ${PR_BODY@Q} | sed 's/\r$//' > pr-body-orig.txt
-        env:
-          PR_BODY: ${{ github.event.pull_request.body }}
-      - name: Parse Tasklist
-        id: parse-tasklist
-        run: |
-          grep -oP '(^- \[ \] COMPLIANCE-).+' pr-body-orig.txt > tasklist.txt
-      - name: Create Issues
-        id: create-issues
-        run: |
-          for task in $(cat tasklist.txt); do
-            gh issue create --title "COMPLIANCE-${task}-${{ github.event.pull_request.number }}" --body "This issue was automatically created from a tasklist item in the PR body." --assignee "${{ github.actor }}" --label compliance >> issue-urls.txt
-          done
-      - name: Update PR Body
-        run: |
-            awk -f modify-tasklist.awk issue-urls.txt pr-body-orig.txt > pr-body-new.txt
-            gh pr edit --body "$(cat pr-body-new.txt)" --repo "${{ github.repository }}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Cleanup
-        run: |
-          rm pr-body-orig.txt
-          rm pr-body-new.txt
-          rm tasklist.txt
-          rm issue-urls.txt
+      - name: Setup python3
+        uses: actions/setup-python@v4
+        with:
+            python-version: '3.x'
+      - name: run script
+        run: python3 ./scripts/compliance.py

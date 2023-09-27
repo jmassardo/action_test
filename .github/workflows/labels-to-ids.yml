@@ -3,7 +3,6 @@ name: labels to id's
 on:
   issues:
     types: [labeled]
-  issue_comment:
 
 jobs:
   process-issue:
