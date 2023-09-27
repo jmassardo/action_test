@@ -1,4 +1,4 @@
-#!/usr/bin/awk -f
+ #!/usr/bin/awk -f
 # Set the input and output field separators to newline characters
 BEGIN {
     FS="\n"
