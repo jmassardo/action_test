@@ -1,0 +1,55 @@
+name: Compliance Filter
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [trigger-workflow]
+
+jobs:
+  Initial-Filtering:
+    name: Initial Filtering
+    runs-on: ubuntu-latest
+    outputs:
+      COMPLIANCE_ENFORCED: ${{ steps.get-compliance-enforcement.outputs.COMPLIANCE_ENFORCED }}
+    steps:
+      - name: Query Compliance Enforcement
+        id: get-compliance-enforcement
+        shell: bash
+        run: |
+          echo "COMPLIANCE_ENFORCED=$(gh api repos/$REPO/properties | jq ".properties.CIE_ComplianceEnforcement")" >> "$GITHUB_OUTPUT"
+        env:
+          REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+        
+      - name: Test Compliance Enforcement
+        id: test-compliance-enforcement
+        run: |
+          echo "The repo, ${{ github.repository }} has CIE Compliance enforcement: $COMPLIANCE_ENFORCED"
+
+  Compliance-Enforced:
+    name: Compliance Enforced
+    runs-on: ubuntu-latest
+    needs: Initial-Filtering
+    env:
+      COMPLIANCE_ENFORCED: ${{ needs.Initial-Filtering.outputs.COMPLIANCE_ENFORCED || false}}
+    
+    steps:
+      - name: Display Compliance Enforcement
+        if: ${{ env.COMPLIANCE_ENFORCED }} == "true"
+        run: |
+          echo "## Compliance Enforcement" >> $GITHUB_STEP_SUMMARY
+          echo "The repo, ${{ github.repository }} has CIE Compliance enforcement: $COMPLIANCE_ENFORCED" >> $GITHUB_STEP_SUMMARY
+
+  Compliance-Not-Enforced:
+    name: Compliance Not Enforced
+    runs-on: ubuntu-latest
+    needs: Initial-Filtering
+    env:
+      COMPLIANCE_ENFORCED: ${{ needs.Initial-Filtering.outputs.COMPLIANCE_ENFORCED || false}}
+    
+    steps:
+      - name: Display Compliance Enforcement
+        if: ${{ env.COMPLIANCE_ENFORCED }} == "false"
+        run: |
+          echo "## Compliance Enforcement" >> $GITHUB_STEP_SUMMARY
+          echo "The repo, ${{ github.repository }} has CIE Compliance enforcement: $COMPLIANCE_ENFORCED" >> $GITHUB_STEP_SUMMARY
