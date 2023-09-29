@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: Initial-Filtering
     env:
-      COMPLIANCE_ENFORCED: ${{ needs.Initial-Filtering.outputs.COMPLIANCE_ENFORCED || false}}
+      COMPLIANCE_ENFORCED: ${{ needs.Initial-Filtering.outputs.COMPLIANCE_ENFORCED && true || false}}
     
     steps:
       - name: Display Compliance Enforcement
@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: Initial-Filtering
     env:
-      COMPLIANCE_ENFORCED: ${{ needs.Initial-Filtering.outputs.COMPLIANCE_ENFORCED || false}}
+      COMPLIANCE_ENFORCED: ${{ needs.Initial-Filtering.outputs.COMPLIANCE_ENFORCED && true || false}}
     
     steps:
       - name: Display Compliance Enforcement
