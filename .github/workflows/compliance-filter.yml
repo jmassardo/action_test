@@ -16,7 +16,7 @@ jobs:
         id: get-compliance-enforcement
         shell: bash
         run: |
-          echo "::set-output COMPLIANCE_ENFORCED=true"
+          echo "COMPLIANCE_ENFORCED=true" >> "$GITHUB_OUTPUT"
         env:
           REPO: ${{ github.repository }}
           GH_TOKEN: ${{ github.token }}
