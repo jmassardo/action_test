@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: Initial-Filtering
     env:
-      COMPLIANCE_ENFORCED: ${{ needs.Initial-Filtering.outputs.COMPLIANCE_ENFORCED && true || false}}
+      COMPLIANCE_ENFORCED: ${{ needs.Initial-Filtering.outputs.COMPLIANCE_ENFORCED}}
     
     steps:
       - name: Display Compliance Enforcement
@@ -45,11 +45,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: Initial-Filtering
     env:
-      COMPLIANCE_ENFORCED: ${{ needs.Initial-Filtering.outputs.COMPLIANCE_ENFORCED && true || false}}
+      COMPLIANCE_ENFORCED: ${{ needs.Initial-Filtering.outputs.COMPLIANCE_ENFORCED}}
     
     steps:
       - name: Display Compliance Enforcement
-        if: ${{ needs.Initial-Filtering.outputs.COMPLIANCE_ENFORCED }}
+        if: ${{ !needs.Initial-Filtering.outputs.COMPLIANCE_ENFORCED }}
         run: |
           echo "## Compliance Enforcement" >> $GITHUB_STEP_SUMMARY
           echo "The repo, ${{ github.repository }} has CIE Compliance enforcement: $COMPLIANCE_ENFORCED" >> $GITHUB_STEP_SUMMARY
