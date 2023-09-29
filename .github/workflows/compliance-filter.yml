@@ -16,7 +16,7 @@ jobs:
         id: get-compliance-enforcement
         shell: bash
         run: |
-          echo "COMPLIANCE_ENFORCED=false
+          echo "COMPLIANCE_ENFORCED=false"
         env:
           REPO: ${{ github.repository }}
           GH_TOKEN: ${{ github.token }}
