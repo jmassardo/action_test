@@ -1,0 +1,19 @@
+name: Env test
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test_env:
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - name: deploy
+        run: |
+          echo "Current environment status: $STATUS"
+        env:
+          STATUS: ${{ env.ENV_STATUS }}
+      
