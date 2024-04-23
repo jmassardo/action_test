@@ -22,3 +22,15 @@ jobs:
         run: |
           echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
           echo 'Artifact URL is ${{ steps.artifact-upload-step.outputs.artifact-url }}'
+      - name: Add comment
+        run: gh issue comment "$NUMBER" --body "$BODY"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+          BODY: >
+            Greetings @${{github.context.payload.sender.login}}!
+            
+            We have successfully compoleted your model inference run. You can download your results [here](${{ steps.artifact-upload-step.outputs.artifact-url }})
+            
+            Please note that these results will only be available for 30 days after which they will be removed and this issue closed.
