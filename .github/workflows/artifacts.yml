@@ -31,7 +31,7 @@ jobs:
           GH_REPO: ${{ github.repository }}
           NUMBER: ${{ github.event.issue.number }}
           BODY: >
-            Greetings @${{github.context.payload.sender.login}}!
+            Greetings @${{ context.payload.sender.login }}!
             
             We have successfully compoleted your model inference run. You can download your results [here](${{ steps.artifact-upload-step.outputs.artifact-url }})
             
