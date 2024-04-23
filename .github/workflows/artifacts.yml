@@ -1,0 +1,19 @@
+name: test-artifact
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  generate_artifact:
+    name: Generates a sample artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate test data
+        run: |
+          ls -al > test.csv
+      - name: Upload output to GitHub
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-artifact
+          path: test.csv
+          retention-days: 30
