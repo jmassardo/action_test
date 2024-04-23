@@ -12,8 +12,13 @@ jobs:
         run: |
           ls -al > test.csv
       - name: Upload output to GitHub
+        id: artifact-upload-step
         uses: actions/upload-artifact@v2
         with:
           name: test-artifact
           path: test.csv
           retention-days: 30
+      - name: Output artifact download URL
+        run: |
+          echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
+          echo 'Artifact URL is ${{ steps.artifact-upload-step.outputs.artifact-url }}'
