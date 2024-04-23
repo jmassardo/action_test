@@ -31,7 +31,10 @@ jobs:
           GH_REPO: ${{ github.repository }}
           NUMBER: ${{ github.event.issue.number }}
           BODY: >
-            Greetings @{{ github.event.issue.user.login }}!\n\n
+            Greetings @${{ github.event.issue.user.login }}!
+
+            
             We have successfully compoleted your model inference run. You can download your results [here](${{ steps.artifact-upload-step.outputs.artifact-url }})
+
             
             Please note that these results will only be available for 30 days after which they will be removed and this issue closed.
