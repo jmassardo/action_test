@@ -13,7 +13,7 @@ jobs:
           ls -al > test.csv
       - name: Upload output to GitHub
         id: artifact-upload-step
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: test-artifact
           path: test.csv
