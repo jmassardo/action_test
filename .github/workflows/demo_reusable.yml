@@ -1,0 +1,17 @@
+name: Reusable Example
+on:
+  workflow_call:
+    inputs:
+      FIRST_NAME:
+        required: true
+        type: string
+jobs:
+  Say-Hello:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [16, 18, 20]
+    steps:
+      - name: Say Hello
+        run: |
+          echo "Node ${{ matrix.version }} says: Hello, ${{ inputs.FIRST_NAME }}!"

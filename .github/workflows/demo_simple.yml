@@ -1,0 +1,13 @@
+name: Simple Example
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [simple]
+
+jobs:
+  demo_simple:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Hello, world!"

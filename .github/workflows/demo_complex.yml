@@ -1,0 +1,11 @@
+name: local_call
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/demo_reusable.yml
+    with:
+      FIRST_NAME: Jenna
